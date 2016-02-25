@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+~  Copyright (c) 2016, WSO2 Inc. (http://wso2.com) All Rights Reserved.
+~
+~  WSO2 Inc. licenses this file to you under the Apache License,
+~  Version 2.0 (the "License"); you may not use this file except
+~  in compliance with the License.
+~  You may obtain a copy of the License at
+~
+~   http://www.apache.org/licenses/LICENSE-2.0
+~
+~  Unless required by applicable law or agreed to in writing,
+~  software distributed under the License is distributed on an
+~  "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+~  KIND, either express or implied.  See the License for the
+~  specific language governing permissions and limitations
+~  under the License.
+-->
+<component name="fourSq_user" type="synapse/template">
+    <subComponents>
+        <component name="getUserDetails">
+            <file>getUserDetails.xml</file>
+            <description>Returns profile information</description>
+        </component>
+        <component name="getFriendDetails">
+            <file>getFriendDetails.xml</file>
+            <description>get the friends list</description>
+        </component>
+        <component name="getBadgeDetails">
+            <file>getBadgeDetails.xml</file>
+            <description>get the user badges</description>
+        </component>
+        <component name="getMayorshipDetails">
+            <file>getMayorshipDetails.xml</file>
+            <description>get the mayorships list</description>
+        </component>
+        <component name="getUserCheckinDetails">
+            <file>getUserCheckinDetails.xml</file>
+            <description>get the checkins list</description>
+        </component>
+        <component name="getTipsDetails">
+            <file>getTipsDetails.xml</file>
+            <description>get the Tips list</description>
+        </component>
+        <component name="approveFriends">
+            <file>approveFriends.xml</file>
+            <description>approve the friend request</description>
+        </component>
+        <component name="unFriends">
+            <file>unFriends.xml</file>
+            <description>unfriend a friend from the friends list</description>
+        </component>
+        <component name="updateProfilePhoto">
+            <file>updateProfilePhoto.xml</file>
+            <description>Update User Profile Photo</description>
+        </component>
+    </subComponents>
+</component>
