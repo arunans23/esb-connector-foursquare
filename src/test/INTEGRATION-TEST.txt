@@ -41,7 +41,7 @@ STEPS:
 		NOTE : 	CERT_FILE_NAME - Replace CERT_FILE_NAME with the file name that was extracted from Foursquare with the extension. (e.g. foursquare.crt)
 			    CERT_NAME - Replace CERT_NAME with an arbitrary name for the certificate. (e.g. Foursquare)
 
- 2. Make sure the ESB 4.9.0 zip file with latest patches available at "{Foursquare_connector_Home}/repository/"
+ 2. Make sure the ESB 4.9.0 zip file available at "{Foursquare_connector_Home}/repository/"
 
  3. This ESB should be configured as below;
 	Please make sure that the below mentioned Axis configurations are enabled (\repository\conf\axis2\axis2.xml).
