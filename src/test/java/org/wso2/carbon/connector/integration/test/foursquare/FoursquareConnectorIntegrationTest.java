@@ -48,7 +48,7 @@ public class FoursquareConnectorIntegrationTest extends ConnectorIntegrationTest
 
 
         System.out.println("**<<<<<<<<<<<<<<<<<<<<<<<<<* Starting init *>>>>>>>>>>>>>>>>>>>>>>>>>>**");
-        super.init("foursquare-connector-1.0.0");
+        super.init("foursquare-connector-1.0.1-SNAPSHOT");
         System.out.println("**<<<<<<<<<<<<<<<<<<<<<<<<<* init Executed *>>>>>>>>>>>>>>>>>>>>>>>>>>**");
         esbRequestHeadersMap.put("Accept-Charset", "UTF-8");
         esbRequestHeadersMap.put("Content-Type", "application/json");
