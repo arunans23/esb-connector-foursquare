@@ -22,8 +22,6 @@
     <parameter name="checkinId" description="Check-in ID of the check-in" />
     <parameter name="comment" description="Comment on the Check-in" />
 
-
-
     <sequence>
         <property name="HTTP_METHOD" value="POST" scope="axis2" type="STRING"/>
         <property name="uri.var.checkinId" expression="$func:checkinId" scope="default" type="STRING" />
