@@ -26,10 +26,6 @@
             <file>getFriendDetails.xml</file>
             <description>get the friends list</description>
         </component>
-        <component name="getBadgeDetails">
-            <file>getBadgeDetails.xml</file>
-            <description>get the user badges</description>
-        </component>
         <component name="getMayorshipDetails">
             <file>getMayorshipDetails.xml</file>
             <description>get the mayorships list</description>

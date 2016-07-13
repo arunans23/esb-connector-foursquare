@@ -48,13 +48,11 @@
                           expression="fn:concat(get-property('parameters'),'&amp;signature=',get-property('uri.var.signature'))"/>
             </else>
         </filter>
-        <payloadFactory media-type="xml">
+        <payloadFactory media-type="json">
             <format>
                 <soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/">
                     <soapenv:Header/>
-                    <soapenv:Body>
-
-                    </soapenv:Body>
+                    <soapenv:Body/>
                 </soapenv:Envelope>
             </format>
             <args/>

@@ -46,7 +46,6 @@ public class FoursquareConnectorIntegrationTest extends ConnectorIntegrationTest
     @BeforeClass(alwaysRun = true)
     public void setEnvironment() throws Exception {
 
-
         System.out.println("**<<<<<<<<<<<<<<<<<<<<<<<<<* Starting init *>>>>>>>>>>>>>>>>>>>>>>>>>>**");
         super.init("foursquare-connector-1.0.1-SNAPSHOT");
         System.out.println("**<<<<<<<<<<<<<<<<<<<<<<<<<* init Executed *>>>>>>>>>>>>>>>>>>>>>>>>>>**");
@@ -57,7 +56,6 @@ public class FoursquareConnectorIntegrationTest extends ConnectorIntegrationTest
         apiRequestHeadersMap.put("Content-Type", "application/x-www-form-urlencoded");
         apiRequestHeadersMap.putAll(esbRequestHeadersMap);
         apiRequestHeadersMap.put("Authorization", "Bearer "+connectorProperties.getProperty("accessToken"));
-
     }
 
 
@@ -77,14 +75,11 @@ public class FoursquareConnectorIntegrationTest extends ConnectorIntegrationTest
 
         RestResponse<JSONObject> esbRestResponse = sendJsonRestRequest(proxyUrl, "POST", esbRequestHeadersMap, "esb_getCheckinDetailsMandatory.txt");
         RestResponse<JSONObject> apiRestResponse = sendJsonRestRequest(apiEndPoint, "GET", apiRequestHeadersMap);
-
         Assert.assertEquals(esbRestResponse.getBody().getJSONObject("response").getJSONObject("checkin").get("id"), apiRestResponse.getBody().getJSONObject("response").getJSONObject("checkin").get("id"));
         Assert.assertEquals(esbRestResponse.getBody().getJSONObject("response").getJSONObject("checkin").get("createdAt"), apiRestResponse.getBody().getJSONObject("response").getJSONObject("checkin").get("createdAt"));
         Assert.assertEquals(esbRestResponse.getBody().getJSONObject("response").getJSONObject("checkin").get("timeZoneOffset"), apiRestResponse.getBody().getJSONObject("response").getJSONObject("checkin").get("timeZoneOffset"));
 
-
     }
-
 
     /**
      * Positive test case for getCheckinDetails
@@ -109,7 +104,6 @@ public class FoursquareConnectorIntegrationTest extends ConnectorIntegrationTest
         Assert.assertEquals(esbRestResponse.getBody().getJSONObject("response").getJSONObject("checkin").get("createdAt"), apiRestResponse.getBody().getJSONObject("response").getJSONObject("checkin").get("createdAt"));
         Assert.assertEquals(esbRestResponse.getBody().getJSONObject("response").getJSONObject("checkin").get("timeZoneOffset"), apiRestResponse.getBody().getJSONObject("response").getJSONObject("checkin").get("timeZoneOffset"));
 
-
     }
 
 
@@ -129,14 +123,9 @@ public class FoursquareConnectorIntegrationTest extends ConnectorIntegrationTest
 
         RestResponse<JSONObject> esbRestResponse = sendJsonRestRequest(proxyUrl, "POST", esbRequestHeadersMap, "esb_getCheckinDetailsNegative.txt");
         RestResponse<JSONObject> apiRestResponse = sendJsonRestRequest(apiEndPoint, "GET", apiRequestHeadersMap);
-
-
-
         Assert.assertEquals(esbRestResponse.getHttpStatusCode(), 400);
         Assert.assertEquals(apiRestResponse.getHttpStatusCode(), 401);
         Assert.assertEquals(esbRestResponse.getBody().getJSONObject("meta").get("errorType"), apiRestResponse.getBody().getJSONObject("meta").get("errorType"));
-
-
     }
 
 
@@ -157,12 +146,8 @@ public class FoursquareConnectorIntegrationTest extends ConnectorIntegrationTest
                 +"&broadcast="+ connectorProperties.getProperty("broadcast")+ "&oauth_token="+connectorProperties.getProperty("accessToken");
 
         RestResponse<JSONObject> apiRestResponse = sendJsonRestRequest(apiEndPoint, "POST", apiRequestHeadersMap);
-
-
         Assert.assertEquals(esbRestResponse.getBody().getJSONObject("response").getJSONObject("checkin").get("timeZoneOffset"), apiRestResponse.getBody().getJSONObject("response").getJSONObject("checkin").get("timeZoneOffset"));
         Assert.assertEquals(esbRestResponse.getBody().getJSONObject("response").getJSONObject("checkin").getJSONObject("score").get("total"), apiRestResponse.getBody().getJSONObject("response").getJSONObject("checkin").getJSONObject("score").get("total"));
-
-
     }
 
     /**
@@ -177,21 +162,14 @@ public class FoursquareConnectorIntegrationTest extends ConnectorIntegrationTest
         RestResponse<JSONObject> esbRestResponse =
                 sendJsonRestRequest(proxyUrl, "POST", esbRequestHeadersMap, "esb_addCheckins_optional.txt");
 
-
         String apiEndPoint = connectorProperties.getProperty("apiUrl") + "/v2/checkins/add?v=20140626&venueId=" + connectorProperties.getProperty("venueId")
                 +"&broadcast="+ connectorProperties.getProperty("broadcast")+ "&ll=" +connectorProperties.getProperty("ll")+ "&oauth_token="+connectorProperties.getProperty("accessToken");
 
         RestResponse<JSONObject> apiRestResponse = sendJsonRestRequest(apiEndPoint, "POST", apiRequestHeadersMap);
 
-
        Assert.assertEquals(esbRestResponse.getBody().getJSONObject("response").getJSONObject("checkin").get("timeZoneOffset"), apiRestResponse.getBody().getJSONObject("response").getJSONObject("checkin").get("timeZoneOffset"));
        Assert.assertEquals(esbRestResponse.getBody().getJSONObject("response").getJSONObject("checkin").getJSONObject("score").get("total"), apiRestResponse.getBody().getJSONObject("response").getJSONObject("checkin").getJSONObject("score").get("total"));
-
-
     }
-
-
-
 
     /**
      * Negative test case for addCheckins method with negative parameters.
@@ -211,15 +189,11 @@ public class FoursquareConnectorIntegrationTest extends ConnectorIntegrationTest
 
         RestResponse<JSONObject> apiRestResponse = sendJsonRestRequest(apiEndPoint, "POST", apiRequestHeadersMap);
 
-
-
         Assert.assertEquals(esbRestResponse.getHttpStatusCode(), 400);
         Assert.assertEquals(apiRestResponse.getHttpStatusCode(), 400);
         Assert.assertEquals(esbRestResponse.getBody().getJSONObject("meta").get("errorDetail"), apiRestResponse.getBody().getJSONObject("meta").get("errorDetail"));
         Assert.assertEquals(esbRestResponse.getBody().getJSONObject("meta").get("errorType"), apiRestResponse.getBody().getJSONObject("meta").get("errorType"));
         Assert.assertEquals(esbRestResponse.getBody().getJSONObject("meta").get("code"), apiRestResponse.getBody().getJSONObject("meta").get("code"));
-
-
     }
 
 
@@ -241,9 +215,6 @@ public class FoursquareConnectorIntegrationTest extends ConnectorIntegrationTest
 
         Assert.assertEquals(esbRestResponse.getBody().getJSONObject("response").getJSONObject("comment").get("text"), apiRestResponse.getBody().getJSONObject("response").getJSONObject("comment").get("text"));
         Assert.assertEquals(esbRestResponse.getBody().getJSONObject("response").getJSONObject("comment").getJSONObject("user").get("relationship"), apiRestResponse.getBody().getJSONObject("response").getJSONObject("comment").getJSONObject("user").get("relationship"));
-
-
-
     }
 
     /**
@@ -266,8 +237,6 @@ public class FoursquareConnectorIntegrationTest extends ConnectorIntegrationTest
         Assert.assertEquals(esbRestResponse.getHttpStatusCode(), 400);
         Assert.assertEquals(apiRestResponse.getHttpStatusCode(), 401);
         Assert.assertEquals(esbRestResponse.getBody().getJSONObject("meta").get("errorType"), apiRestResponse.getBody().getJSONObject("meta").get("errorType"));
-
-
 
     }
 
@@ -314,8 +283,6 @@ public class FoursquareConnectorIntegrationTest extends ConnectorIntegrationTest
         Assert.assertEquals(apiRestResponse.getHttpStatusCode(),200);
         Assert.assertEquals(esbRestResponse.getHttpStatusCode(), 200);
         Assert.assertEquals(esbRestResponse.getBody().getJSONObject("response").getJSONArray("recent").getJSONObject(0).get("like").toString(), apiRestResponse.getBody().getJSONObject("response").getJSONArray("recent").getJSONObject(0).get("like").toString());
-
-
     }
 
     /**
@@ -338,8 +305,6 @@ public class FoursquareConnectorIntegrationTest extends ConnectorIntegrationTest
         Assert.assertEquals(apiRestResponse.getHttpStatusCode(), 400);
         Assert.assertEquals(esbRestResponse.getBody().getJSONObject("meta").get("errorType"), apiRestResponse.getBody().getJSONObject("meta").get("errorType"));
         Assert.assertEquals(esbRestResponse.getBody().getJSONObject("meta").get("code"), apiRestResponse.getBody().getJSONObject("meta").get("code"));
-
-
     }
 
     /**
@@ -389,7 +354,6 @@ public class FoursquareConnectorIntegrationTest extends ConnectorIntegrationTest
 
     }
 
-
     //-------------------------------------------------------User Category----------------------------------------------------------------------------------------------------------------------------------
 
     /**
@@ -411,7 +375,6 @@ public class FoursquareConnectorIntegrationTest extends ConnectorIntegrationTest
 
     }
 
-
     /**
      * Negaive test case for getUserDetails method.
      */
@@ -431,15 +394,11 @@ public class FoursquareConnectorIntegrationTest extends ConnectorIntegrationTest
         Assert.assertEquals(esbRestResponse.getBody().getJSONObject("meta").get("errorType"), apiRestResponse.getBody().getJSONObject("meta").get("errorType"));
         Assert.assertEquals(esbRestResponse.getBody().getJSONObject("meta").get("code"), apiRestResponse.getBody().getJSONObject("meta").get("code"));
 
-
-
     }
 
     /**
      * Positive test case for getFriendDetails method with mandatory parameters.
      */
-
-
     @Test(priority = 2, description = "foursquare {getFriendDetails} integration test with mandatory fields.")
     public void testgetFriendDetailsWithMandatoryFields() throws IOException, JSONException, NoSuchAlgorithmException {
 
@@ -455,12 +414,9 @@ public class FoursquareConnectorIntegrationTest extends ConnectorIntegrationTest
 
     }
 
-
-
     /**
      * Positive test case for getFriendDetails method with optional parameters. (limit, offset)
      */
-
 
     @Test(priority = 2, description = "foursquare {getFriendDetails} integration test with optional fields.")
     public void testgetFriendDetailsWithOptionalFields() throws IOException, JSONException, NoSuchAlgorithmException {
@@ -480,10 +436,9 @@ public class FoursquareConnectorIntegrationTest extends ConnectorIntegrationTest
 
     }
 
-/**
+    /**
      * Negative test case for getFriendtails method
      */
-
 
     @Test(priority = 2, description = "foursquare {getFriendDetails} integration test with negative case.")
     public void testgetFriendDetailsWithNegativeCase() throws IOException, JSONException, NoSuchAlgorithmException {
@@ -505,59 +460,9 @@ public class FoursquareConnectorIntegrationTest extends ConnectorIntegrationTest
 
     }
 
-
-    /**
-     * Positive test case for getUserBadges method with mandatory parameters.
-     */
-
-
-    @Test(priority = 2, description = "foursquare {getBadgeDetails} integration test with mandatory fields.")
-    public void testgetBadgeDetailsWithMandatoryFields() throws IOException, JSONException, NoSuchAlgorithmException {
-
-        esbRequestHeadersMap.put("Action", "urn:getBadgeDetails");
-        String apiEndPoint = connectorProperties.getProperty("apiUrl")+"/v2/users/"+connectorProperties.getProperty("userId")
-                +"/badges"
-                +"?v=20140626"
-                +"&oauth_token="+connectorProperties.getProperty("accessToken");
-
-        RestResponse<JSONObject> esbRestResponse = sendJsonRestRequest(proxyUrl, "POST", esbRequestHeadersMap, "esb_getBadgeDetailsMandatory.txt");
-        RestResponse<JSONObject> apiRestResponse = sendJsonRestRequest(apiEndPoint, "GET", apiRequestHeadersMap);
-
-        Assert.assertEquals(esbRestResponse.getBody().getJSONObject("response").getJSONObject("badges").getJSONObject("4f6a48ae7beb7e5831d4dffe").get("name").toString(), apiRestResponse.getBody().getJSONObject("response").getJSONObject("badges").getJSONObject("4f6a48ae7beb7e5831d4dffe").get("name").toString());
-
-    }
-
-
-    /**
-     * Negative test case for getUserBadges method with mandatory parameters.
-     */
-
-
-
-    @Test(priority = 2, description = "foursquare {getBadgeDetails} integration test with negative case.")
-    public void testgetBadgeDetailsWithNegativeCase() throws IOException, JSONException, NoSuchAlgorithmException {
-
-        esbRequestHeadersMap.put("Action", "urn:getBadgeDetails");
-        String apiEndPoint = connectorProperties.getProperty("apiUrl")+"/v2/users/"+connectorProperties.getProperty("userId")
-                +"/badges"
-                +"?v=20140626"
-                +"&oauth_token="+connectorProperties.getProperty("accessTokenInvalid");
-
-        RestResponse<JSONObject> esbRestResponse = sendJsonRestRequest(proxyUrl, "POST", esbRequestHeadersMap, "esb_getBadgeDetailsNegative.txt");
-        RestResponse<JSONObject> apiRestResponse = sendJsonRestRequest(apiEndPoint, "GET", apiRequestHeadersMap);
-
-        Assert.assertEquals(esbRestResponse.getHttpStatusCode(), 401);
-        Assert.assertEquals(esbRestResponse.getBody().getJSONObject("meta").get("errorDetail"), apiRestResponse.getBody().getJSONObject("meta").get("errorDetail"));
-        Assert.assertEquals(esbRestResponse.getBody().getJSONObject("meta").get("errorType"), apiRestResponse.getBody().getJSONObject("meta").get("errorType"));
-        Assert.assertEquals(esbRestResponse.getBody().getJSONObject("meta").get("code"), apiRestResponse.getBody().getJSONObject("meta").get("code"));
-
-    }
-
-
     /**
      * Positive test case for getMayorshipDetails method with mandatory parameters.
      */
-
 
     @Test(priority = 2, description = "foursquare {getMayorshipDetails} integration test with mandatory fields.")
     public void testgetMayorshipDetailsWithMandatoryFields() throws IOException, JSONException, NoSuchAlgorithmException {
@@ -579,12 +484,9 @@ public class FoursquareConnectorIntegrationTest extends ConnectorIntegrationTest
 
     }
 
-
-
     /**
      * Negative test case for getUserMayorships method.
      */
-
 
     @Test(priority = 2, description = "foursquare {getMayorshipDetails} integration test with negative fields.")
     public void testgetMayorshipDetailsWithNegativeCase() throws IOException, JSONException, NoSuchAlgorithmException {
@@ -605,11 +507,9 @@ public class FoursquareConnectorIntegrationTest extends ConnectorIntegrationTest
 
     }
 
-
     /**
      * Positive test case for getUserCheckinDetails method with mandatory parameters.
      */
-
 
     @Test(priority = 2, description = "foursquare {getUserCheckinDetails} integration test with mandatory fields.")
     public void testgetUserCheckinDetailsWithMandatoryFields() throws IOException, JSONException, NoSuchAlgorithmException {
@@ -628,8 +528,6 @@ public class FoursquareConnectorIntegrationTest extends ConnectorIntegrationTest
         Assert.assertEquals(apiRestResponse.getHttpStatusCode(), 200);
     }
 
-
-
     /**
      * Positive test case for getUserCheckins method with optional parameters.(limit, offset, afterTimeStamp, beforeTimeStamp)
      */
@@ -647,10 +545,8 @@ public class FoursquareConnectorIntegrationTest extends ConnectorIntegrationTest
                 +"&beforeTimestamp="+connectorProperties.getProperty("beforeTimestamp")
                 +"&oauth_token="+connectorProperties.getProperty("accessToken");
 
-
         RestResponse<JSONObject> esbRestResponse = sendJsonRestRequest(proxyUrl, "POST", esbRequestHeadersMap, "esb_getUserCheckinDetailsOptional.txt");
         RestResponse<JSONObject> apiRestResponse = sendJsonRestRequest(apiEndPoint, "GET", apiRequestHeadersMap);
-
 
         Assert.assertEquals(esbRestResponse.getHttpStatusCode(),200);
         Assert.assertEquals(apiRestResponse.getHttpStatusCode(), 200);
@@ -679,13 +575,11 @@ public class FoursquareConnectorIntegrationTest extends ConnectorIntegrationTest
         RestResponse<JSONObject> esbRestResponse = sendJsonRestRequest(proxyUrl, "POST", esbRequestHeadersMap, "esb_getUserCheckinDetailsNegative.txt");
         RestResponse<JSONObject> apiRestResponse = sendJsonRestRequest(apiEndPoint, "GET", apiRequestHeadersMap);
 
-
         Assert.assertEquals(esbRestResponse.getHttpStatusCode(), 401);
         Assert.assertEquals(apiRestResponse.getHttpStatusCode(), 401);
         Assert.assertEquals(esbRestResponse.getBody().getJSONObject("meta").get("errorDetail"), apiRestResponse.getBody().getJSONObject("meta").get("errorDetail"));
         Assert.assertEquals(esbRestResponse.getBody().getJSONObject("meta").get("errorType"), apiRestResponse.getBody().getJSONObject("meta").get("errorType"));
         Assert.assertEquals(esbRestResponse.getBody().getJSONObject("meta").get("code"), apiRestResponse.getBody().getJSONObject("meta").get("code"));
-
 
     }
 
@@ -701,7 +595,6 @@ public class FoursquareConnectorIntegrationTest extends ConnectorIntegrationTest
                 +"/tips"
                 +"?v=20140626"
                 +"&oauth_token="+connectorProperties.getProperty("accessToken");
-
 
         RestResponse<JSONObject> esbRestResponse = sendJsonRestRequest(proxyUrl, "POST", esbRequestHeadersMap, "esb_getTipsDetailsMandatory.txt");
         RestResponse<JSONObject> apiRestResponse = sendJsonRestRequest(apiEndPoint, "GET", apiRequestHeadersMap);
@@ -728,10 +621,8 @@ public class FoursquareConnectorIntegrationTest extends ConnectorIntegrationTest
                 +"&offset="+connectorProperties.getProperty("offset")
                 +"&oauth_token="+connectorProperties.getProperty("accessToken");
 
-
         RestResponse<JSONObject> esbRestResponse = sendJsonRestRequest(proxyUrl, "POST", esbRequestHeadersMap, "esb_getTipsDetailsOptional.txt");
         RestResponse<JSONObject> apiRestResponse = sendJsonRestRequest(apiEndPoint, "GET", apiRequestHeadersMap);
-
 
         Assert.assertEquals(esbRestResponse.getBody().getJSONObject("response").getJSONObject("tips").get("count").toString(), apiRestResponse.getBody().getJSONObject("response").getJSONObject("tips").get("count").toString());
         Assert.assertEquals(esbRestResponse.getHttpStatusCode(),200);
@@ -764,10 +655,7 @@ public class FoursquareConnectorIntegrationTest extends ConnectorIntegrationTest
         Assert.assertEquals(esbRestResponse.getBody().getJSONObject("meta").get("errorDetail"), apiRestResponse.getBody().getJSONObject("meta").get("errorDetail"));
         Assert.assertEquals(esbRestResponse.getBody().getJSONObject("meta").get("errorType"), apiRestResponse.getBody().getJSONObject("meta").get("errorType"));
         Assert.assertEquals(esbRestResponse.getBody().getJSONObject("meta").get("code"), apiRestResponse.getBody().getJSONObject("meta").get("code"));
-
-
     }
-
 
     /**
      * Positive test case for approveFriends method with mandatory parameters.
@@ -788,11 +676,7 @@ public class FoursquareConnectorIntegrationTest extends ConnectorIntegrationTest
         Assert.assertEquals(esbRestResponse.getHttpStatusCode(), 400);
         Assert.assertEquals(apiRestResponse.getHttpStatusCode(), 400);
         Assert.assertEquals(apiRestResponse.getBody().getJSONObject("meta").get("errorMessage").toString(), esbRestResponse.getBody().getJSONObject("meta").get("errorMessage").toString());
-
-
     }
-
-
 
     /**
      * Negative test case for approveFriends method.
@@ -858,10 +742,6 @@ public class FoursquareConnectorIntegrationTest extends ConnectorIntegrationTest
         Assert.assertEquals(esbRestResponse.getHttpStatusCode(), 200);
         Assert.assertEquals(apiRestResponse.getHttpStatusCode(), 401);
     }
-
-
-
-
 }
 
 
